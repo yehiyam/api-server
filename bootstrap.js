@@ -13,7 +13,8 @@ let log;
 const modules = [
     'lib/apiServer',
     'lib/statusReportService',
-    'lib/utils/etcdRfSinglton'
+    'lib/utils/etcdRfSinglton',
+    'lib/service/ExecutionService.js'
 
 ];
 

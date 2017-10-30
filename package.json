@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "./dockerfile/build.sh api-server"
   },
   "keywords": [
     "swagger"
@@ -19,7 +20,7 @@
     "js-yaml": "^3.3.0",
     "logger.rf": "^1.0.2",
     "node-etcd": "^5.1.0",
-    "producer-consumer.rf": "^1.0.3",
+    "producer-consumer.rf": "^1.0.6",
     "swagger-tools": "0.10.1"
   }
 }

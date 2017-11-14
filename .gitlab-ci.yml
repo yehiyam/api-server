@@ -57,7 +57,7 @@ cache:
   paths:
   - node_modules/
 
-test:
+.test:
   stage: test
   only:
     - master

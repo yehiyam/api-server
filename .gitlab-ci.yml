@@ -27,6 +27,7 @@ version:
     - curl -X POST -F "token=${TRIGGER_TOKEN}" -F "ref=$(git describe --abbrev=0 --tags)" "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/trigger/pipeline"
 
 install:
+  stage: install
   only:
     - triggers
   script:

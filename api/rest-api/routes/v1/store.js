@@ -8,10 +8,14 @@
 
 const express = require('express');
 const Store = require('lib/service/StoreService');
+const metrics = require('../../../../lib/utils/prometheus');
 
 var routes = function () {
     const router = express.Router();
-
+    router.use((req, res, next) => {
+        res.locals.startEpoch = Date.now();
+        next();
+    });
     router.get('/', function (req, res) {
         res.json({ message: 'store api' });
     });
@@ -19,6 +23,7 @@ var routes = function () {
         const sort = req.query.sort;
         Store.getPipelines().then((response) => {
             res.json(response);
+            next();
         }).catch((error) => {
             return next(error);
         });
@@ -27,6 +32,7 @@ var routes = function () {
         const name = req.params.name;
         Store.getPipeline({ name }).then((response) => {
             res.json(response);
+            next();
         }).catch((error) => {
             return next(error);
         });
@@ -34,6 +40,7 @@ var routes = function () {
     router.post('/pipelines', (req, res, next) => {
         Store.updatePipeline(req.body).then((response) => {
             res.json(response);
+            next();
         }).catch((error) => {
             return next(error);
         });
@@ -41,6 +48,7 @@ var routes = function () {
     router.put('/pipelines', (req, res, next) => {
         Store.updatePipeline(req.body).then((response) => {
             res.json(response);
+            next();
         }).catch((error) => {
             return next(error);
         });
@@ -49,9 +57,21 @@ var routes = function () {
         const name = req.query.name;
         Store.deletePipeline({ name }).then((response) => {
             res.json(response);
+            next();
         }).catch((error) => {
             return next(error);
         });
+    });
+    router.use((req, res, next) => {
+        const responseTimeInMs = Date.now() - res.locals.startEpoch;
+        metrics.httpRequestDurationMicroseconds({
+            method: req.method,
+            route: req.originalUrl,
+            code: res.statusCode,
+            duration: responseTimeInMs
+        });
+        metrics.requestCounter.inc({ method: req.method, path: req.route.path, code: res.statusCode });
+        next()
     });
 
     return router;

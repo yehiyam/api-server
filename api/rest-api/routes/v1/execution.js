@@ -17,28 +17,28 @@ const routes = function () {
     });
     router.post('/raw', (req, res, next) => {
         Execution.runRaw(req.body).then((response) => {
-            res.json(response);
+            res.json({ id: response });
         }).catch((error) => {
             return next(error);
         });
     });
-    router.post('/stored', async (req, res, next) => {
+    router.post('/stored', (req, res, next) => {
         Execution.runStored(req.body).then((response) => {
-            res.json({ executionID: response });
+            res.json({ id: response });
         }).catch((error) => {
             return next(error);
         });
     });
-    router.get('/status/:executionID', (req, res, next) => {
-        const executionID = req.params.executionID;
+    router.get('/status', (req, res, next) => {
+        const executionID = req.query.id;
         Execution.getJobStatus({ executionID }).then((response) => {
             res.json(response);
         }).catch((error) => {
             return next(error);
         });
     });
-    router.get('/results/:executionID', (req, res, next) => {
-        const executionID = req.params.executionID;
+    router.get('/results', (req, res, next) => {
+        const executionID = req.query.id;
         Execution.getJobResult({ executionID }).then((response) => {
             res.json(response);
         }).catch((error) => {

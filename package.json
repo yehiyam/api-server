@@ -6,7 +6,8 @@
     "scripts": {
         "prestart": "npm install",
         "start": "node index.js",
-        "build": "./dockerfile/build.sh api-server"
+        "build": "./dockerfile/build.sh api-server",
+        "test": "echo No test defined"
     },
     "license": "MIT",
     "private": true,

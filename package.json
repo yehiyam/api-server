@@ -1,6 +1,6 @@
 {
     "name": "api-server",
-    "version": "1.0.25",
+    "version": "1.0.26",
     "description": "algorithm flows extraordinaire",
     "main": "index.js",
     "scripts": {

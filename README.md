@@ -23,10 +23,10 @@ The reasons for chosing this structure is:
 
 ### Example
 
-Lets see a simple pipeline with three nodes, node green process data -> pass it to yellow -> pass to red
-
+Lets see a simple pipeline with three nodes, node green process data -> pass it to yellow -> pass to red  
 The DAG of this pipeline will look like:  
-![Diagram](/docs/images/simple-pipeline.png)
+![Diagram](/docs/images/simple-pipeline.png)  
+the input of one node is the output of the other
 
 and the json representation:
 

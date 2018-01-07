@@ -23,6 +23,7 @@ The reasons for choosing this structure are:
 
 Here we can see the most basic pipeline
 
+
 ```js
 "nodes": [{
     "nodeName": "green",
